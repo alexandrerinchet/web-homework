@@ -1,111 +1,79 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* Main container styling */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: #333;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+    background-color: #f5f5f5;
+    margin: 0;
     padding: 20px;
 }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+/* Section styling */
+section {
+    background-color: #69afa9a1;
+    margin: 20px 0;
+    padding: 30px;
+    border-left: 5px solid #0066cc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Section titles */
+section h2 {
+    color: #0066cc;
+    font-size: 1.8em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #0066cc;
+    padding-bottom: 10px;
+}
+
+/* Alternating section colors */
+section:nth-child(even) {
+    border-left-color: #00a86b;
+}
+
+section:nth-child(even) h2 {
+    color: #00a86b;
+    border-bottom-color: #00a86b;
+}
+
+/* Article/entry styling within sections */
+section article {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fafafa;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+section article:hover {
+    background-color: #f0f0f0;
+}
+
+section article h3 {
+    color: #0066cc;
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+}
+
+section article p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Header styling */
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 50px 30px;
     text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    border-bottom: 3px solid #0066cc;
 }
 
 header h1 {
-    font-size: 2.5em;
-    margin-bottom: 10px;
-}
-
-header p {
-    font-size: 1.1em;
-    opacity: 0.9;
-}
-
-section {
-    padding: 30px;
-    border-bottom: 1px solid #eee;
-}
-
-section h2 {
-    color: #667eea;
-    font-size: 1.8em;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 3px solid #667eea;
-}
-
-.job, .education, .skill {
-    margin-bottom: 20px;
-}
-
-.job h3, .education h3 {
-    color: #764ba2;
-    font-size: 1.2em;
-    margin-bottom: 5px;
-}
-
-.job p, .education p {
-    color: #666;
-    font-style: italic;
-    margin-bottom: 5px;
-}
-
-.skills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.skill {
-    background: #667eea;
-    color: white;
-    padding: 8px 15px;
-    border-radius: 25px;
-    font-size: 0.95em;
+    color: #0066cc;
     margin: 0;
-}
-
-a {
-    color: #667eea;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-footer {
-    background: #f5f7fa;
-    padding: 20px;
-    text-align: center;
-    color: #666;
-    font-size: 0.95em;
-}
-
-@media (max-width: 600px) {
-    header h1 {
-        font-size: 1.8em;
-    }
-    
-    section {
-        padding: 20px;
-    }
+    font-size: 2.5em;
 }
