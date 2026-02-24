@@ -1,4 +1,3 @@
-/* Main container styling */
 body {
     font-family: Verdana, sans-serif;
     line-height: 1.6;
@@ -8,7 +7,6 @@ body {
     padding: 20px;
 }
 
-/* Section styling */
 section {
     background-color: #69afa9a1;
     margin: 20px 0;
@@ -18,7 +16,6 @@ section {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Section titles */
 section h1 {
     color: #0066cc;
     font-size: 1.8em;
