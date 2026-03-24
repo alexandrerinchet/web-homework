@@ -1,0 +1,146 @@
+body {
+  font-family: Verdana, sans-serif;
+  line-height: 1.6;
+  color: #333333;
+  background-color: #c1dadf;
+  margin: 0;
+  padding: 20px;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.header {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.header__title {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header__title h1 {
+  margin: 0;
+}
+
+.tagline {
+  margin: 0.3rem 0 0;
+  color: #555;
+}
+
+.profile-photo {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 3px solid rgba(0, 102, 204, 0.6);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.social a svg {
+  width: 28px;
+  height: 28px;
+  fill: #0066cc;
+  transition: transform 0.2s ease, fill 0.2s ease;
+}
+
+.social a:hover svg {
+  transform: translateY(-2px);
+  fill: #004a99;
+}
+
+.sidebar {
+  background: rgba(255, 255, 255, 0.85);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}
+
+.main {
+  display: grid;
+  gap: 20px;
+}
+
+.section {
+  background-color: rgba(105, 175, 169, 0.65);
+  padding: 30px;
+  border-left: 5px solid #0066cc;
+  border-radius: 12px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.section:hover {
+  background-color: rgba(105, 175, 169, 0.85);
+  transform: translateY(-3px);
+}
+
+.section h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #003b5c;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+  }
+
+  .header {
+    grid-column: 1 / -1;
+  }
+
+  .sidebar {
+    position: sticky;
+    top: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  body {
+    background-color: #a6d3d9;
+  }
+
+  .wrapper {
+    grid-template-columns: 280px 1fr 220px;
+  }
+
+  .main {
+    grid-column: 2 / 3;
+  }
+
+  .sidebar {
+    grid-column: 1 / 2;
+  }
+}
+
+
