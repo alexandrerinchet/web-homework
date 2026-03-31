@@ -132,12 +132,14 @@ document.addEventListener("DOMContentLoaded",
             }
         }
 
-        //TMP: to test the previous function: 3 lines and 5 columns
-        draw_map(3, 5, [
-            [ [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0] ],
-            [ [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0] ],
-            [ [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0] ],
-        ])
+      //TMP: to test the previous function: 3 lines and 5 columns
+       // draw_map(3, 5, [
+       //     [ [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0] ],
+       //     [ [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0] ],
+       //     [ [255, 0, 0], [255, 255, 0], [255, 0, 0], [255, 255, 0], [255, 0, 0] ],
+       // ]) 
+       // en commentaire car on en a plus besoin (c'est juste un test)
+        
 
         //TODO:
         // write a function that applies a set of color changes

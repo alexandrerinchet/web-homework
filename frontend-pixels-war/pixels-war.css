@@ -30,3 +30,21 @@ body {
     }
     margin-bottom: 1rem;
 }
+
+/* ajout de l'affichage des coordonnées et du cooldown */
+
+#coord-display,
+#cooldown-display {
+    position: fixed;
+    right: 10px;
+    font-size: 12px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 3px;
+    min-width: 6em;
+    text-align: center;
+}
+ 
+#coord-display   { top: 10px; }
+#cooldown-display { top: 40px; }
