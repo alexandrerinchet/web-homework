@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Application de Messagerie</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-view" class="view">
+        <h1>Connexion au serveur</h1>
+        <input type="text" id="username-input" placeholder="Nom d'utilisateur">
+        <button onclick="joinSystem()">Entrer</button>
+    </div>
+
+    <div id="rooms-view" class="view hidden">
+        <h2>Salons disponibles</h2>
+        <p>Connecté en tant que : <strong id="current-user-display"></strong></p>
+        <button onclick="logout()" class="btn-quit">Quitter</button>
+        <ul id="rooms-list"></ul>
+    </div>
+
+    <div id="chat-view" class="view hidden">
+        <h2>Salon : <span id="current-room-display"></span></h2>
+        <button onclick="leaveRoom()">Retour aux salons</button>
+        <div id="chat-box"></div>
+        <div class="input-area">
+            <input type="text" id="message-input" placeholder="Écrire un message...">
+            <button onclick="sendMessage()">Envoyer</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
