@@ -24,6 +24,7 @@ def startup():
         conn.execute("CREATE TABLE IF NOT EXISTS users (name TEXT UNIQUE)")
         conn.execute("CREATE TABLE IF NOT EXISTS rooms (name TEXT UNIQUE)")
         conn.execute("CREATE TABLE IF NOT EXISTS messages (room_name TEXT, user_name TEXT, text TEXT)")
+        conn.execute("CREATE TABLE IF NOT EXISTS subscriptions (user_name TEXT, room_name TEXT, UNIQUE(user_name, room_name))")
         conn.commit()
     finally:
         conn.close() # fermeture pour éviter pb de database locked
@@ -71,6 +72,38 @@ def get_messages(room_name: str):
         conn.close()
 
 active_connections = {}
+
+# routes d'abonnement
+
+@app.get("/users/{user_name}/subscriptions")
+def get_subscriptions(user_name: str):
+    conn = get_db()
+    try:
+        subs = conn.execute("SELECT room_name FROM subscriptions WHERE user_name = ?", (user_name,)).fetchall()
+        return [s["room_name"] for s in subs]
+    finally:
+        conn.close()
+
+@app.post("/users/{user_name}/subscribe/{room_name}")
+def toggle_subscription(user_name: str, room_name: str):
+    conn = get_db()
+    try:
+        # vérif de si l'utilisateur est déjà abonné
+        sub = conn.execute("SELECT 1 FROM subscriptions WHERE user_name = ? AND room_name = ?", (user_name, room_name)).fetchone()
+        
+        if sub:
+            # si abonné, on le désabonne
+            conn.execute("DELETE FROM subscriptions WHERE user_name = ? AND room_name = ?", (user_name, room_name))
+            status = "unsubscribed"
+        else:
+            # sinon, on l'abonne
+            conn.execute("INSERT INTO subscriptions (user_name, room_name) VALUES (?, ?)", (user_name, room_name))
+            status = "subscribed"
+            
+        conn.commit()
+        return {"status": status, "room": room_name}
+    finally:
+        conn.close()
 
 @app.websocket("/ws/{room_name}/{user_name}")
 async def websocket_endpoint(websocket: WebSocket, room_name: str, user_name: str):

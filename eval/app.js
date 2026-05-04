@@ -4,6 +4,7 @@ const WS_URL = "ws://localhost:8000";
 let currentUser = null;
 let currentRoom = null;
 let ws = null;
+let userSubscriptions = [];
 
 function showView(viewId) {
     document.querySelectorAll('.view').forEach(v => v.classList.add('hidden'));
@@ -28,12 +29,16 @@ async function fetchRooms() {
     list.innerHTML = 'Chargement des salons...';
     
     try {
-        const response = await fetch(`${API_URL}/rooms`);
-        if (!response.ok) throw new Error('Erreur de réseau');
-        const rooms = await response.json();
+        // récupérer tous les salons
+        const responseRooms = await fetch(`${API_URL}/rooms`);
+        const rooms = await responseRooms.json();
+        // récupérer les abonnements de l'utilisateur
+        const responseSubs = await fetch(`${API_URL}/users/${currentUser}/subscriptions`);
+        userSubscriptions = await responseSubs.json();
+        
         renderRooms(rooms);
     } catch (error) {
-        list.innerHTML = `<li style="color:red">Erreur : Backend introuvable. Avez-vous lancé FastAPI ?</li>`;
+        list.innerHTML = `<li style="color:red">Erreur : Impossible de charger les salons.</li>`;
     }
 }
 
@@ -48,16 +53,24 @@ function renderRooms(rooms) {
 
     rooms.forEach(room => {
         const li = document.createElement('li');
+        const isSubscribed = userSubscriptions.includes(room.name);
         const nameSpan = document.createElement('span');
-        nameSpan.innerText = room.name;
+        nameSpan.innerHTML = isSubscribed ? `<strong>★ ${room.name}</strong>` : room.name;
 
         const controls = document.createElement('div');
         controls.className = 'controls';
+
+        const subBtn = document.createElement('button');
+        subBtn.innerText = isSubscribed ? "Se désabonner" : "S'abonner";
+        if (isSubscribed) subBtn.style.backgroundColor = "#ffcccc"; // Rouge clair si déjà abonné
+        
+        subBtn.onclick = () => toggleSubscription(room.name);
 
         const enterBtn = document.createElement('button');
         enterBtn.innerText = "Entrer";
         enterBtn.onclick = () => enterRoom(room.name);
 
+        controls.appendChild(subBtn);
         controls.appendChild(enterBtn);
         li.appendChild(nameSpan);
         li.appendChild(controls);
@@ -133,3 +146,15 @@ document.getElementById('message-input').addEventListener('keypress', function (
 document.getElementById('username-input').addEventListener('keypress', function (e) {
     if (e.key === 'Enter') joinSystem();
 });
+
+async function toggleSubscription(roomName) {
+    try {
+        await fetch(`${API_URL}/users/${currentUser}/subscribe/${roomName}`, {
+            method: 'POST'
+        });
+        // On recharge la liste pour mettre à jour les boutons et l'étoile
+        fetchRooms();
+    } catch (error) {
+        console.error("Erreur lors de l'abonnement");
+    }
+}
